@@ -1,42 +1,24 @@
-name: 'security-devops-action'
-description: 'Run security analyzers.'
-author: 'Microsoft'
-branding:
-  icon: 'shield'
-  color: 'black'
-inputs:
-  config:
-    description: A file path to a .gdnconfig file.
-  policy:
-    description: The name of the well known policy to use. Defaults to GitHub.
-    default: GitHub
-  categories:
-    description: A comma separated list of analyzer categories to run. Values secrets, code, artifacts, IaC, containers. Example IaC,secrets. Defaults to all.
-  languages:
-    description: A comma separated list of languages to analyze. Example javascript, typescript. Defaults to all.
-  tools:
-    description: A comma separated list of analyzer tools to run. Example bandit, binskim, eslint, template-analyzer, terrascan, trivy.
-outputs:
-  sarifFile:
-    description: A file path to a SARIF results file.
-runs:
-  using: 'node16'
-  main: 'lib/action.js'
-  steps:
-  - uses: actions/checkout@v3
-  - uses: actions/setup-dotnet@v3
-    with:
-      dotnet-version: |
-        5.0.x
-        6.0.x
-  - name: Run Microsoft Security DevOps
-    uses: microsoft/security-devops-action@preview
-    id: msdo
-  - name: Upload results to Security tab
-    uses: github/codeql-action/upload-sarif@v2
-    with:
-      sarif_file: ${{ steps.msdo.outputs.sarifFile }}
-  - name: Upload results to Security tab
-    uses: github/codeql-action/upload-sarif@v2
-    with:
-      sarif_file: ${{ steps.msdo.outputs.sarifFile }}
+name: learn-security-devops
+run-name: ${{ github.actor }} is learning Security Devops
+on: [push]
+jobs:
+  check-bats-version:
+    runs-on: windows-latest
+    steps:
+    - uses: actions/checkout@v3
+    - uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: |
+          5.0.x
+          6.0.x
+    - name: Run Microsoft Security DevOps
+      uses: microsoft/security-devops-action@preview
+      id: msdo
+    - name: Upload results to Security tab
+      uses: github/codeql-action/upload-sarif@v2
+      with:
+        sarif_file: ${{ steps.msdo.outputs.sarifFile }}
+    - name: Upload results to Security tab
+      uses: github/codeql-action/upload-sarif@v2
+      with:
+        sarif_file: ${{ steps.msdo.outputs.sarifFile }}
