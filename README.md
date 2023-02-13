@@ -1,4 +1,4 @@
-# MDCTest
+# M365 Cert Evaluation Test
 
 ## Make some change on the README.md
-### test 1
+### test m365 quick evaluation
