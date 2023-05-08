@@ -21,3 +21,9 @@ jobs:
         template: ./deploy/Storage.template.json
         parameters: storageAccountType=Standard_LRS
     - run: echo ${{ steps.deployarm.outputs.deploymentId }}
+    
+    - name: Microsoft 365 certification quick evaluation
+      uses: Azure/microsoft-365-certification-quick-evaluation@v1.0.1
+      with:
+        report-name: 'Demo01'
+
