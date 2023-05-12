@@ -41,7 +41,19 @@
             }
         }
     },
-    "resources": [],
+    "resources": [
+        {
+            "type": "Microsoft.Storage/storageAccounts",
+            "apiVersion": "2022-05-01",
+            "name": "[parameters('storageAccountName')]",
+            "location": "[parameters('location')]",
+            "sku": {
+                "name": "[parameters('storageAccountType')]"
+            },
+            "kind": "StorageV2",
+            "properties": {}
+        }
+    ],
     "outputs": {
         "deploymentId": {
             "type": "string",
