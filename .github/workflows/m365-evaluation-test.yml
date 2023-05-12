@@ -26,4 +26,4 @@ jobs:
       uses: Azure/microsoft-365-certification-quick-evaluation@v1.0.1
       with:
         report-name: 'Demo01'
-
+        deployment-ids: '["${{ steps.deployarm.outputs.deploymentId }}"]'
